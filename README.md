@@ -9,7 +9,6 @@ model with weak turbulence and pointing errors", ICTON 2024.
 - `code/` – Python implementation (model, BER, Monte Carlo, all figures)
 - `report/` – solution report (PDF + LaTeX)
 - `code_doc/` – code walkthrough (PDF + LaTeX)
-- `slides/` – presentation (PPTX + PDF)
 - `figures/`, `results/` – generated outputs
 
 ## Run
