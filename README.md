@@ -20,8 +20,8 @@ python run_all.py
 ```
 ## Run in colab 
 ```%cd /content
-!git clone https://github.com/sweety-w-sys/Student-Assignment-free-space-optics-with-turbulence-and-pointing-errors.git
-%cd Student-Assignment-free-space-optics-with-turbulence-and-pointing-errors/code
+!git clone https://github.com/sweety-w-sys/Assignment-free-space-optics-with-turbulence-and-pointing-errors.git
+%cd Assignment-free-space-optics-with-turbulence-and-pointing-errors/code
 !python run_all.py
 ```
 
