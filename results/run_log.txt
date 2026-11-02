@@ -1,0 +1,30 @@
+System: {'wz': 1.98, 'A0': np.float64(0.001274528778445659), 'wzeq': np.float64(1.9806612641076013), 'hl': 0.8585389442329879}
+[1] model check
+[2] nine points
+  ss=0.12 R2=0.1 kappa= 21.54 area(1e-6)=1.0022 D17=0.0021 paper=0.005
+  ss=0.12 R2=0.5 kappa= 48.16 area(1e-6)=1.0004 D17=0.0007 paper=0.003
+  ss=0.12 R2=1.0 kappa= 68.11 area(1e-6)=1.0002 D17=0.0004 paper=0.0
+  ss=0.25 R2=0.1 kappa=  4.96 area(1e-6)=1.0472 D17=0.0949 paper=0.11
+  ss=0.25 R2=0.5 kappa= 11.10 area(1e-6)=1.0083 D17=0.0177 paper=0.02
+  ss=0.25 R2=1.0 kappa= 15.69 area(1e-6)=1.0041 D17=0.0103 paper=0.01
+  ss=0.35 R2=0.1 kappa=  2.53 area(1e-6)=1.7519 D17=1.3022 paper=0.18
+  ss=0.35 R2=0.5 kappa=  5.66 area(1e-6)=1.0347 D17=0.1255 paper=0.13
+  ss=0.35 R2=1.0 kappa=  8.01 area(1e-6)=1.0164 D17=0.0584 paper=0.06
+[3] instability map
+[4] BER curves
+/home/claude/fso_assignment/code/ber.py:76: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  val, _ = integrate.quad(f, 0.0, hmax, points=[op.A0hl], limit=400)
+  green: P16=5.662 dBm  D17=0.000  D18=0.753  MC-exact=-0.012 dB
+  yellow: P16=2.268 dBm  D17=0.018  D18=0.439  MC-exact=-0.020 dB
+  pink: P16=-1.069 dBm  D17=1.302  D18=1.372  MC-exact=-0.008 dB
+[5] outage
+  green: P(avgBER=FEC)=5.66  P(Pout=1e-3)=12.53  P(Pout=1e-6)=19.76 dBm
+  yellow: P(avgBER=FEC)=2.27  P(Pout=1e-3)=7.78  P(Pout=1e-6)=12.92 dBm
+  pink: P(avgBER=FEC)=-1.07  P(Pout=1e-3)=2.56  P(Pout=1e-6)=6.33 dBm
+[6] interleaver
+  green: N=1 12.60 (closed 12.53) ... N=128 9.14  N=inf 5.66 dBm
+  yellow: N=1 7.79 (closed 7.78) ... N=128 4.39  N=inf 2.27 dBm
+  pink: N=1 2.53 (closed 2.56) ... N=128 -0.25  N=inf -1.07 dBm
+done -> /home/claude/fso_assignment/results
