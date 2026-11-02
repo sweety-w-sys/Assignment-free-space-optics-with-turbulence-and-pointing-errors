@@ -10,6 +10,7 @@ model with weak turbulence and pointing errors", ICTON 2024.
 - `report/` – solution report (PDF + LaTeX)
 - `code_doc/` – code walkthrough (PDF + LaTeX)
 - `figures/`, `results/` – generated outputs
+- `slides/` – presentation (PDF)
 
 ## Run
 ```bash
