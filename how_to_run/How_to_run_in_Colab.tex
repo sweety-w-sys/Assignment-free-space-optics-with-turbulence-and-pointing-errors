@@ -1,0 +1,92 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}
+\usepackage{lmodern}\usepackage[scaled=0.95]{helvet}\renewcommand{\familydefault}{\sfdefault}
+\usepackage{xcolor,listings,enumitem,tabularx,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+\definecolor{nav}{HTML}{004191}\definecolor{bg}{HTML}{F4F7FB}\definecolor{cm}{HTML}{5A7A5A}
+\lstset{basicstyle=\ttfamily\footnotesize,backgroundcolor=\color{bg},frame=single,rulecolor=\color{nav!30},
+  breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false,
+  commentstyle=\color{cm}\itshape,morecomment=[l]{\#},xleftmargin=3pt,xrightmargin=3pt,aboveskip=6pt,belowskip=6pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist{itemsep=2pt,topsep=2pt}
+\newcommand{\step}[2]{\vspace{8pt}{\large\bfseries\color{nav}Step #1 --- #2}\par\vspace{-2pt}{\color{nav}\rule{\linewidth}{0.5pt}}\par}
+\begin{document}
+
+{\LARGE\bfseries\color{nav} How to Run the FSO Assignment in Google Colab}\par\vspace{2pt}
+{\color{gray}A simplified FSO channel model with weak turbulence and pointing errors --- Sweety Kumari Vishwakarma}
+
+\vspace{6pt}
+\fcolorbox{nav}{nav!5}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{
+You can run the whole assignment directly in a notebook: nothing has to be installed. The code is uploaded to GitHub at
+\href{https://github.com/sweety-w-sys/Assignment-free-space-optics-with-turbulence-and-pointing-errors}{\color{nav}github.com/sweety-w-sys/Assignment-free-space-optics-with-turbulence-and-pointing-errors},
+and one Python command (\texttt{run\_all.py}) reproduces every figure and number of the report and the presentation.
+The results and figures are regenerated every time the code runs, and with Step~4 they are updated in the repository as well.}}
+
+\vspace{4pt}
+\textbf{Before you start:} open \href{https://colab.research.google.com}{\color{nav}colab.research.google.com}, sign in with a Google account and choose \textbf{New notebook}. Paste each step into a code cell and press the \textbf{Run} button (or Shift+Enter).
+
+% ---------------------------------------------------------------------
+\step{1}{Get the code and run the simulation}
+Clones the repository from GitHub and runs all tasks (about 10--15 minutes).
+\begin{lstlisting}
+%cd /content
+!git clone https://github.com/sweety-w-sys/Assignment-free-space-optics-with-turbulence-and-pointing-errors.git
+%cd Assignment-free-space-optics-with-turbulence-and-pointing-errors/code
+!python run_all.py            # or: !python run_all.py --quick  (faster check)
+\end{lstlisting}
+The console prints the main results (\(\Delta_{17}\), \(\Delta_{18}\), area under (14), outage, interleaver). If you run the cell again in the same session, \texttt{git clone} reports \emph{``destination path already exists''}; this is harmless --- use Step~2 instead.
+
+% ---------------------------------------------------------------------
+\step{2}{Get the latest version (same session, later runs)}
+Downloads any changes made on GitHub since the first clone, then runs again.
+\begin{lstlisting}
+%cd /content/Assignment-free-space-optics-with-turbulence-and-pointing-errors
+!git pull
+%cd code
+!python run_all.py
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+\step{3}{(Optional) Rebuild the report PDF with the new figures}
+Installs LaTeX the first time (3--5 minutes) and compiles \texttt{report/report.tex}; the figures are taken from \texttt{figures/}.
+\begin{lstlisting}
+!apt-get -qq install -y texlive-latex-extra texlive-fonts-recommended texlive-science lmodern > /dev/null
+%cd /content/Assignment-free-space-optics-with-turbulence-and-pointing-errors/report
+!pdflatex -interaction=nonstopmode report.tex > /dev/null
+!pdflatex -interaction=nonstopmode report.tex > /dev/null
+!ls -la report.pdf
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+\newpage
+\step{4}{(Owner only) Push the new results to GitHub}
+Requires a GitHub token stored in Colab \textbf{Secrets} (key icon on the left) under the name \texttt{GH\_TOKEN}, with \emph{Notebook access} switched on. The token is never written in the notebook.
+\begin{lstlisting}
+from google.colab import userdata
+t = userdata.get('GH_TOKEN')
+%cd /content/Assignment-free-space-optics-with-turbulence-and-pointing-errors
+!git config user.name "sweety-w-sys"
+!git config user.email "148787313+sweety-w-sys@users.noreply.github.com"
+!git add figures results report/report.pdf
+!git commit -m "Update results from Colab run"
+!git push https://{t}@github.com/sweety-w-sys/Assignment-free-space-optics-with-turbulence-and-pointing-errors.git main
+!git fetch
+!git status
+\end{lstlisting}
+\texttt{nothing to commit} means the results did not change since the last push; \texttt{working tree clean} at the end means Colab and GitHub are in sync.
+
+% ---------------------------------------------------------------------
+\vspace{6pt}
+{\large\bfseries\color{nav}Where the results appear}\par\vspace{-2pt}{\color{nav}\rule{\linewidth}{0.5pt}}\par
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}p{4.3cm}X@{}}
+Console output & main numbers, printed while \texttt{run\_all.py} runs\\
+\texttt{figures/} & all figures (PNG and PDF): model check, BER curves, instability map, area, outage, interleaver\\
+\texttt{results/results.json} & every number used in the report and slides\\
+\texttt{report/report.pdf} & the report, after Step 3\\
+\end{tabularx}
+
+\vspace{4pt}
+{\small\color{gray} The random seed is fixed, so repeated runs give the same results up to the last decimal of the Monte Carlo estimates. Files in Colab are deleted when the session ends; use Step 4 (or download them from the Files panel) to keep them.}
+
+\end{document}
